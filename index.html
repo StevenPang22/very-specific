@@ -304,6 +304,8 @@
                 if (result.success) {
                     form.classList.add('hidden');
                     document.getElementById('thankYou').classList.add('show');
+                    // Track Lead event in Meta Pixel
+                    fbq('track', 'Lead');
                 } else {
                     throw new Error(result.message || 'Submission failed');
                 }
