@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>veryspecific.org</title>
+    <title>Hello.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -224,23 +224,30 @@
     <div class="container">
         <h1>We are looking for a very specific person.</h1>
         
-        <p class="description">You'll know if it's you.</p>
+        <p class="description">If that's you... you're going to want to take this conversation.</p>
 
         <form id="contactForm">
+            <!-- Web3Forms Access Key - Replace with your own from https://web3forms.com -->
+            <input type="hidden" name="access_key" value="484f38de-e67c-4b17-baa1-d2b9c9c38da6">
+            <!-- Optional: Customize the email subject -->
+            <input type="hidden" name="subject" value="New Contact: Very Specific Person">
+            <!-- Honeypot spam protection -->
+            <input type="checkbox" name="botcheck" style="display: none;">
+            
             <div class="field">
-                <input type="text" name="name" placeholder="Name" required>
+                <input type="text" name="name" placeholder="Your Name" required>
             </div>
             <div class="field">
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Your Email" required>
             </div>
             <div class="field role-field">
-                <label>Are you:</label>
+                <label>Have you:</label>
                 <div class="checkbox-group">
-                    <label class="checkbox"><input type="checkbox" name="role" value="athlete"><span>Athlete</span></label>
-                    <label class="checkbox"><input type="checkbox" name="role" value="engineer"><span>Engineer</span></label>
-                    <label class="checkbox"><input type="checkbox" name="role" value="film-producer"><span>Film producer</span></label>
-                    <label class="checkbox"><input type="checkbox" name="role" value="special-ops"><span>Special ops veteran</span></label>
-                    <label class="checkbox"><input type="checkbox" name="role" value="neuroscience"><span>Neuroscience enthusiast</span></label>
+                    <label class="checkbox"><input type="checkbox" name="athlete" value="Yes"><span>Played a competitive sport.</span></label>
+                    <label class="checkbox"><input type="checkbox" name="biology_degree" value="Yes"><span>Gotten a biology degree.</span></label>
+                    <label class="checkbox"><input type="checkbox" name="special_forces" value="Yes"><span>Served in the special forces.</span></label>
+                    <label class="checkbox"><input type="checkbox" name="er_icu" value="Yes"><span>Worked in the ER / ICU.</span></label>
+                    <label class="checkbox"><input type="checkbox" name="debate" value="Yes"><span>Competed in debate in school.</span></label>
                 </div>
             </div>
             <button type="submit">Submit</button>
@@ -250,10 +257,47 @@
     </div>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            this.classList.add('hidden');
-            document.getElementById('thankYou').classList.add('show');
+            
+            const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+            
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    form.classList.add('hidden');
+                    document.getElementById('thankYou').classList.add('show');
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                submitBtn.textContent = 'Error - Try Again';
+                submitBtn.disabled = false;
+                setTimeout(() => {
+                    submitBtn.textContent = originalBtnText;
+                }, 3000);
+            }
         });
     </script>
 </body>
