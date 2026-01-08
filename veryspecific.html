@@ -3,133 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Very Specific | We Look For Very Specific People</title>
+    <title>veryspecific.org</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --color-bg: #FAF9F7;
-            --color-bg-alt: #F2F0ED;
-            --color-text: #1A1A1A;
-            --color-text-muted: #6B6B6B;
-            --color-accent: #8B4513;
-            --color-accent-hover: #A0522D;
-            --color-border: #E0DDD8;
-            --color-border-dark: #C9C5BE;
-            --font-display: 'Cormorant Garamond', Georgia, serif;
-            --font-body: 'Instrument Sans', -apple-system, sans-serif;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: var(--font-body);
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Subtle grain texture */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.025;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        /* Header */
-        header {
-            padding: 2rem 3rem;
+            background: #0a0a0a;
+            color: #e8e4df;
+            font-family: 'EB Garamond', Georgia, serif;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--color-border);
-            animation: fadeDown 0.8s ease-out;
+            justify-content: center;
+            padding: 2rem;
+            line-height: 1.6;
         }
 
-        @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
+        h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 400;
             letter-spacing: 0.02em;
-            color: var(--color-text);
-            text-decoration: none;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
         }
 
-        .logo span {
+        .description {
+            font-size: 1.1rem;
             font-style: italic;
-            color: var(--color-accent);
+            color: #8a8580;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.4s forwards;
         }
 
-        nav {
+        form {
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.8s forwards;
+        }
+
+        .field {
+            margin-bottom: 1.75rem;
+            text-align: left;
+        }
+
+        .role-field {
+            margin-top: 2.5rem;
+            margin-bottom: 0.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .role-field > label {
+            display: block;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+
+        .checkbox-group {
             display: flex;
-            gap: 2.5rem;
-        }
-
-        nav a {
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--color-text);
-        }
-
-        /* Main Content */
-        main {
-            max-width: 1400px;
+            flex-direction: column;
+            gap: 0.35rem;
+            align-items: flex-start;
             margin: 0 auto;
-            padding: 2.5rem 3rem 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            min-height: calc(100vh - 100px);
-            align-items: start;
+            width: fit-content;
         }
 
-        /* Hero Section */
-        .hero {
-            animation: fadeIn 1s ease-out 0.2s both;
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            font-style: normal;
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 0;
+            transition: color 0.3s ease;
+            line-height: 1.3;
+        }
+
+        .checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-style: normal;
+            color: #555;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+            line-height: 1.3;
+            position: relative;
+        }
+
+        .checkbox span {
+            transition: all 0.25s ease;
+        }
+
+        .checkbox span::before {
+            content: '(   )';
+            margin-right: 0.6rem;
+            font-family: inherit;
+            letter-spacing: -0.05em;
+            color: #444;
+            transition: all 0.25s ease;
+        }
+
+        .checkbox:hover {
+            color: #999;
+        }
+
+        .checkbox:hover span::before {
+            color: #666;
+        }
+
+        .checkbox:has(input:checked) {
+            color: #e8e4df;
+        }
+
+        .checkbox:has(input:checked) span::before {
+            content: '( ✓ )';
+            color: #e8e4df;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 0.875rem 0;
+            font-family: inherit;
+            font-size: 1rem;
+            color: #e8e4df;
+            transition: border-color 0.3s ease;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #4a4a4a;
+            font-style: italic;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-bottom-color: #666;
+        }
+
+        textarea {
+            resize: none;
+            min-height: 100px;
+        }
+
+        button {
+            margin-top: 2.5rem;
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 1rem 3rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #e8e4df;
+            color: #0a0a0a;
+            border-color: #e8e4df;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -137,595 +204,56 @@
             }
         }
 
-        .hero-eyebrow {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--color-accent);
-        }
-
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 5vw, 4.5rem);
-            font-weight: 400;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-
-        h1 em {
-            font-style: italic;
-            color: var(--color-accent);
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--color-text-muted);
-            max-width: 480px;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-        }
-
-        .hero-description p {
-            margin-bottom: 1rem;
-        }
-
-        /* About Section */
-        .about-section {
-            padding-top: 2.5rem;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .about-heading {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            color: var(--color-accent);
-            margin-bottom: 1.2rem;
-            font-style: italic;
-        }
-
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .about-paragraph {
-            font-size: 0.95rem;
-            line-height: 1.9;
-            color: var(--color-text-muted);
-            letter-spacing: 0.02em;
-        }
-
-        .about-paragraph strong {
-            color: var(--color-text);
-            font-weight: 500;
-        }
-
-        .about-highlight {
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: var(--color-text);
-            font-style: italic;
-            padding-left: 1.5rem;
-            border-left: 2px solid var(--color-accent);
-            margin: 0.5rem 0;
-        }
-
-        .about-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 0.5rem;
-        }
-
-        .about-list li {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            line-height: 2;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .about-list li::before {
-            content: '◆';
-            position: absolute;
-            left: 0;
-            color: var(--color-accent);
-            font-size: 0.7rem;
-        }
-
-        /* Form Section */
-        .form-section {
-            animation: fadeIn 1s ease-out 0.4s both;
-        }
-
-        .form-container {
-            background: white;
-            border: 1px solid var(--color-border);
-            padding: 3rem;
-            position: relative;
-        }
-
-        .form-container::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            right: 8px;
-            bottom: 8px;
-            border: 1px solid var(--color-border);
-            z-index: -1;
-        }
-
-        /* Form Tabs */
-        .form-tabs {
-            display: flex;
-            gap: 0;
-            margin-bottom: 2.5rem;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .form-tab {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            background: none;
-            border: none;
-            color: var(--color-text-muted);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .form-tab::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--color-accent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .form-tab:hover {
-            color: var(--color-text);
-        }
-
-        .form-tab.active {
-            color: var(--color-text);
-        }
-
-        .form-tab.active::after {
-            transform: scaleX(1);
-        }
-
-        /* Form Styles */
-        .form-panel {
+        .submitted {
             display: none;
+            font-style: italic;
+            color: #8a8580;
+            animation: fadeIn 0.5s ease forwards;
         }
 
-        .form-panel.active {
+        .submitted.show {
             display: block;
-            animation: fadeIn 0.4s ease-out;
         }
 
-        .form-title {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-subtitle {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 1rem;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            border: 1px solid var(--color-border);
-            background: var(--color-bg);
-            color: var(--color-text);
-            transition: all 0.3s ease;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--color-accent);
-            background: white;
-        }
-
-        input::placeholder, textarea::placeholder {
-            color: var(--color-text-muted);
-            opacity: 0.6;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B6B6B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1.25rem 2rem;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            background: var(--color-text);
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--color-accent);
-            transform: translateY(-2px);
-        }
-
-        .form-footer {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--color-border);
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-            text-align: center;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--color-border);
-            padding: 2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--color-text-muted);
-        }
-
-        footer a {
-            color: var(--color-text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--color-text);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            main {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-                padding: 4rem 2rem;
-            }
-
-            .hero {
-                text-align: center;
-            }
-
-            .hero-eyebrow {
-                justify-content: center;
-            }
-
-            .hero-eyebrow::before {
-                display: none;
-            }
-
-            .hero-description {
-                margin: 0 auto 3rem;
-            }
-
-            .about-section {
-                text-align: center;
-            }
-            
-            .about-highlight {
-                margin: 1rem auto;
-                max-width: 480px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            header {
-                padding: 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav {
-                gap: 1.5rem;
-            }
-
-            main {
-                padding: 3rem 1.5rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-section {
-                text-align: left;
-            }
-            
-            .about-highlight {
-                margin: 1rem 0;
-                font-size: 1rem;
-            }
-            
-            .about-list li {
-                font-size: 0.85rem;
-            }
-
-            .form-container {
-                padding: 2rem 1.5rem;
-            }
-
-            .form-container::before {
-                display: none;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
+        form.hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo">Very<span>Specific</span></a>
-        <nav>
-            <a href="about.html">About</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+    <div class="container">
+        <h1>We are looking for a very specific person.</h1>
+        
+        <p class="description">You'll know if it's you.</p>
 
-    <main>
-        <section class="hero">
-            <p class="hero-eyebrow">Very Specific</p>
-            <h1>We look for <em>very specific</em> people.</h1>
-            <div class="hero-description">
-                <!-- YOUR DESCRIPTION HERE -->
-                <p>We find <em> extraordinary </em> people for the extraordinary </em> tasks that nobody else can do.</p>
+        <form id="contactForm">
+            <div class="field">
+                <input type="text" name="name" placeholder="Name" required>
             </div>
-            <div class="about-section">
-                <h3 class="about-heading">What We Do</h3>
-                <div class="about-content">
-                    <p class="about-paragraph">
-                        <strong>VerySpecific</strong> is an exclusive talent discovery network which finds <strong>very</strong> specific people for very specific tasks.
-                    </p>
-                    <p class="about-paragraph">
-                        We believe <strong>extraordinary</strong> talent is everywhere. And it's our job to find where you belong.
-                    </p>
-
-                    <div class="about-highlight">
-                        "this is the best thing that has ever happened to me"
-                    </div>
-
-                    <p class="about-paragraph">
-                        We do this free of charge. <strong>Because we love it.</strong>
-                    </p>
+            <div class="field">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="field role-field">
+                <label>Are you:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox"><input type="checkbox" name="role" value="athlete"><span>Athlete</span></label>
+                    <label class="checkbox"><input type="checkbox" name="role" value="engineer"><span>Engineer</span></label>
+                    <label class="checkbox"><input type="checkbox" name="role" value="film-producer"><span>Film producer</span></label>
+                    <label class="checkbox"><input type="checkbox" name="role" value="special-ops"><span>Special ops veteran</span></label>
+                    <label class="checkbox"><input type="checkbox" name="role" value="neuroscience"><span>Neuroscience enthusiast</span></label>
                 </div>
             </div>
-        </section>
+            <button type="submit">Submit</button>
+        </form>
 
-        <section class="form-section" id="contact">
-            <div class="form-container">
-                <div class="form-tabs">
-                    <button class="form-tab active" data-tab="apply">If you are very specific...</button>
-                    <button class="form-tab" data-tab="refer">Refer a Friend</button>
-                </div>
-
-                <!-- Apply Form -->
-                <div class="form-panel active" id="apply-panel">
-                    <h2 class="form-title">Apply... and see what happens!</h2>
-                    <p class="form-subtitle">No strings attached. Let's find your life's calling.</p>
-                    <form id="apply-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" name="firstName" placeholder="Jane" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" name="lastName" placeholder="Doe" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="jane@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
-                        </div>
-                        <div class="form-group">
-                            <label for="linkedin">LinkedIn Profile (Optional)</label>
-                            <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/yourprofile">
-                        </div>
-                        <div class="form-group">
-                            <label for="background">What Makes You Specific?</label>
-                            <textarea id="background" name="background" placeholder="What is strange about you?"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="referral-source">How Did You Find Us?</label>
-                            <select id="referral-source" name="referralSource">
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="ad">Online Advertisement</option>
-                                <option value="social">Social Media</option>
-                                <option value="friend">Friend Referral</option>
-                                <option value="search">Search Engine</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit-btn">Submit Application</button>
-                    </form>
-                    <p class="form-footer">This service is free. You will never be charged a fee for our services.</p>
-                </div>
-
-                <!-- Refer Form -->
-                <div class="form-panel" id="refer-panel">
-                    <h2 class="form-title">Know Someone Specific?</h2>
-                    <p class="form-subtitle">Refer a friend... earn $500 in referral rewards if they are accepted.</p>
-                    <form id="refer-form">
-                        <div class="form-group">
-                            <label for="your-name">Your Name</label>
-                            <input type="text" id="your-name" name="yourName" placeholder="Your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="your-email">Your Email</label>
-                            <input type="email" id="your-email" name="yourEmail" placeholder="your@email.com" required>
-                        </div>
-                        <hr style="border: none; border-top: 1px solid var(--color-border); margin: 2rem 0;">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="friend-first">Friend's First Name</label>
-                                <input type="text" id="friend-first" name="friendFirstName" placeholder="Their first name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="friend-last">Friend's Last Name</label>
-                                <input type="text" id="friend-last" name="friendLastName" placeholder="Their last name" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="friend-email">Friend's Email</label>
-                            <input type="email" id="friend-email" name="friendEmail" placeholder="friend@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="friend-specific">What Makes Them Specific?</label>
-                            <textarea id="friend-specific" name="friendSpecific" placeholder="What's their unique combination? e.g., 'Marine biologist who plays competitive chess and runs a podcast about vintage cars'"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="relationship">Your Relationship</label>
-                            <select id="relationship" name="relationship">
-                                <option value="" disabled selected>How do you know them?</option>
-                                <option value="colleague">Colleague</option>
-                                <option value="friend">Friend</option>
-                                <option value="family">Family</option>
-                                <option value="acquaintance">Acquaintance</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit-btn">Submit Referral</button>
-                    </form>
-                    <p class="form-footer">We'll reach out to your friend with care and discretion.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>© 2025 VerySpecific.org — All rights reserved.</p>
-        <div class="footer-links">
-            <a href="https://linkedin.com/in/steven" target="_blank">Steven</a>
-            <a href="https://linkedin.com/in/spencer" target="_blank">Spencer</a>
-            <a href="https://linkedin.com/in/mark" target="_blank">Mark</a>
-            <span style="color: var(--color-border); margin: 0 0.5rem;">|</span>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="#">Contact</a>
-        </div>
-    </footer>
+        <p class="submitted" id="thankYou">We'll be in touch.</p>
+    </div>
 
     <script>
-        // Tab switching
-        const tabs = document.querySelectorAll('.form-tab');
-        const panels = document.querySelectorAll('.form-panel');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetPanel = tab.dataset.tab;
-                
-                // Update tabs
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Update panels
-                panels.forEach(p => p.classList.remove('active'));
-                document.getElementById(`${targetPanel}-panel`).classList.add('active');
-            });
-        });
-
-        // Form submission handling (placeholder)
-        document.getElementById('apply-form').addEventListener('submit', (e) => {
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Add your form submission logic here
-            alert('Thank you for your application! We\'ll be in touch soon.');
-        });
-
-        document.getElementById('refer-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Add your form submission logic here
-            alert('Thank you for the referral! We\'ll reach out to them with care.');
+            this.classList.add('hidden');
+            document.getElementById('thankYou').classList.add('show');
         });
     </script>
 </body>
